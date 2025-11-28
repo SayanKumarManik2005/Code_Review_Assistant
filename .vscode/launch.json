@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "codereviewapiApplication",
+            "request": "launch",
+            "mainClass": "com.example.codereviewapi.codereviewapiApplication",
+            "projectName": "codereviewapi"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CodeReviewApiApplication<codereviewapi>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.codereviewapi.CodeReviewApiApplication",
+            "projectName": "codereviewapi",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,0 +1,270 @@
+:root {
+  --bg-dark: #1e1e1e;
+  --bg-darker: #121212;
+  --bg-panel: #252526;
+  --accent: #61dafb;
+  --accent-blue: #007acc;
+  --text-main: #e0e0e0;
+  --text-dim: #888;
+  --border: #333;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--bg-darker);
+  color: var(--text-main);
+  overflow: hidden; /* Stops whole page scroll */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* --- HEADER --- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  background-color: #3c3c3c;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0; 
+  z-index: 100;
+}
+
+.header-left { display: flex; align-items: center; gap: 15px; }
+h1 { font-size: 1.2rem; font-weight: 600; color: var(--text-main); margin: 0; }
+
+.sidebar-toggle {
+  background: transparent; border: 1px solid transparent; color: var(--text-main);
+  cursor: pointer; font-size: 1.2rem; padding: 5px 10px; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+}
+.sidebar-toggle:hover { background-color: rgba(255, 255, 255, 0.1); }
+
+/* --- AUTH --- */
+.auth-section { display: flex; align-items: center; gap: 15px; }
+.login-btn {
+  background: var(--accent); color: #000; border: none; padding: 8px 16px;
+  border-radius: 4px; cursor: pointer; font-weight: bold;
+}
+
+/* --- MAIN LAYOUT --- */
+.main-content {
+  flex: 1;
+  display: flex;
+  height: calc(100vh - 60px); /* Matches header height */
+  overflow: hidden;
+}
+
+/* PANELS */
+.pane {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-dark);
+  overflow: hidden;
+}
+
+.panel-header {
+  flex: 0 0 35px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  background-color: var(--bg-panel);
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #ccc;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+/* --- SIDEBAR SCROLL FIX --- */
+.history-container { height: 100%; display: flex; flex-direction: column; background: #181818; }
+.new-chat-section { padding: 10px; border-bottom: 1px solid var(--border); }
+.new-chat-btn { 
+  width: 100%; padding: 8px; background: var(--accent-blue); color: white; 
+  border: none; border-radius: 4px; cursor: pointer; font-weight: 600; 
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+.new-chat-btn:hover { background: #005f9e; }
+
+/* FIX: Added min-height: 0 to allow scrolling */
+.history-list { 
+  flex: 1; 
+  overflow-y: auto; 
+  min-height: 0; 
+}
+
+.history-item { padding: 10px 15px; border-bottom: 1px solid #2a2a2a; cursor: pointer; }
+.history-item:hover { background: #2a2d2e; }
+.code-preview { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--text-main); margin-bottom: 4px; }
+.date-label { font-size: 0.7rem; color: var(--text-dim); }
+
+/* --- EDITOR & OUTPUT SCROLL FIX --- */
+.editor-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* FIX: Prevents editor from growing too large */
+  position: relative;
+}
+
+/* FIX: Added min-height: 0 and improved scrolling */
+.output-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0; /* This forces the scrollbar to appear */
+  padding: 20px;
+  background-color: var(--bg-dark);
+  line-height: 1.6;
+  
+  /* Force Text Visibility */
+  color: #e0e0e0 !important;
+}
+
+/* --- FIX FOR INVISIBLE TEXT --- */
+.output-wrapper h1, .output-wrapper h2, .output-wrapper h3, 
+.output-wrapper p, .output-wrapper li, .output-wrapper span, 
+.output-wrapper strong {
+  color: #e0e0e0 !important;
+}
+
+.output-wrapper pre {
+  background-color: #111 !important;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.output-wrapper code {
+  font-family: 'Fira Code', monospace;
+  background-color: #333;
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: #ff9d00 !important;
+}
+
+/* --- CONTROLS --- */
+.controls-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 15px;
+  background-color: var(--bg-dark);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.review-btn {
+  background-color: var(--accent-blue); color: white; border: none;
+  padding: 8px 20px; border-radius: 4px; cursor: pointer; font-weight: 600;
+}
+.review-btn:hover { background-color: #005f9e; }
+.review-btn:disabled { background-color: #3e3e3e; cursor: not-allowed; }
+
+/* --- UTILS --- */
+.resize-handle {
+  width: 8px; background: var(--bg-dark); border-left: 1px solid var(--border);
+  cursor: col-resize; z-index: 10;
+}
+.resize-handle:hover { background: var(--accent-blue); }
+
+.loading-spinner {
+  border: 2px solid #ffffff33; border-top: 2px solid #fff;
+  border-radius: 50%; width: 14px; height: 14px; animation: spin 1s linear infinite;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* --- WELCOME SCREEN REDESIGN --- */
+
+.welcome-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Calculate full height minus header height (60px) */
+  height: calc(100vh - 60px); 
+  text-align: center;
+  padding: 20px;
+
+  /* BACKGROUND MAGIC */
+  background: 
+    /* 1. Dark Overlay (Makes text readable) */
+    linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.95)),
+    /* 2. Coding Image (High quality dark code background) */
+    url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop');
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* The Main Title "Welcome to Code Review Assistant" */
+.welcome-screen h2 {
+  font-size: 3.5rem; /* Big and Bold */
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+  
+  /* Gradient Text Effect (Cyan to Blue) */
+  background: -webkit-linear-gradient(135deg, #e0e0e0 0%, #61dafb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Subtle Glow */
+  text-shadow: 0px 4px 20px rgba(97, 218, 251, 0.2);
+}
+
+/* The Subtitle text */
+.welcome-screen p {
+  font-size: 1.25rem;
+  color: #a0a0a0; /* Softer gray for readability */
+  max-width: 600px;
+  line-height: 1.6;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+/* Optional: Add a subtle animation to the text */
+.welcome-screen h2, .welcome-screen p {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+/* --- CUSTOM SCROLLBAR (Makes it easier to see) --- */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+::-webkit-scrollbar-thumb {
+  background: #555; /* Brighter color */
+  border-radius: 6px;
+  border: 3px solid #1e1e1e; /* Creates padding effect */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
